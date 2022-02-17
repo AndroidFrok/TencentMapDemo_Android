@@ -33,7 +33,8 @@ import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class LocationLayerActivity extends SupportMapFragmentActivity implements EasyPermissions.PermissionCallbacks, LocationSource, TencentLocationListener, TencentMap.OnMapLongClickListener, RadioGroup.OnCheckedChangeListener {
+public class LocationLayerActivity extends SupportMapFragmentActivity implements EasyPermissions.PermissionCallbacks,
+        LocationSource, TencentLocationListener, TencentMap.OnMapLongClickListener, RadioGroup.OnCheckedChangeListener {
 
     private OnLocationChangedListener locationChangedListener;
 
@@ -92,7 +93,7 @@ public class LocationLayerActivity extends SupportMapFragmentActivity implements
         //创建定位请求
         locationRequest = TencentLocationRequest.create();
         //设置定位周期（位置监听器回调周期）为3s
-        locationRequest.setInterval(3000);
+        locationRequest.setInterval(1000 * 1000);
 
         //地图上设置定位数据源
         tencentMap.setLocationSource(this);
@@ -142,7 +143,7 @@ public class LocationLayerActivity extends SupportMapFragmentActivity implements
     public void onLocationChanged(TencentLocation tencentLocation, int i, String s) {
 
         if (i == TencentLocation.ERROR_OK && locationChangedListener != null) {
-            Location location = new Location(tencentLocation.getProvider());
+            final Location location = new Location(tencentLocation.getProvider());
             //设置经纬度以及精度
             location.setLatitude(tencentLocation.getLatitude());
             location.setLongitude(tencentLocation.getLongitude());
@@ -150,13 +151,13 @@ public class LocationLayerActivity extends SupportMapFragmentActivity implements
             locationChangedListener.onLocationChanged(location);
 
             //显示回调的实时位置信息
-            runOnUiThread(new Runnable() {
+            /*runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     //打印tencentLocation的json字符串
-//                    Toast.makeText(getApplicationContext(), new Gson().toJson(location), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), new Gson().toJson(location), Toast.LENGTH_LONG).show();
                 }
-            });
+            });*/
         }
     }
 

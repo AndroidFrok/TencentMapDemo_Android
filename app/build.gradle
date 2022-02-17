@@ -7,14 +7,15 @@ if (localFile.exists()) {
     properties.load(inputStream)
 }
 
-def mapsdkkey = properties.getProperty('mapsdk.key', "")
+def mapsdkkey = properties.getProperty('mapsdk.key', "F2BBZ-6RLW3-YK43O-YM67L-SZD5O-EEFKQ")
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         applicationId "com.tencent.map.vector.demo"
-        minSdkVersion 22
-        targetSdkVersion 29
+//        applicationId "com.jh.charing"
+        minSdkVersion 21
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

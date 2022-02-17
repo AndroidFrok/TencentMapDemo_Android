@@ -46,6 +46,7 @@
         </activity>
         <activity
             android:name=".location.LocationLayerActivity"
+            android:exported="true"
             android:description="@string/demo_description_show_location"
             android:label="@string/demo_label_show_location">
             <meta-data
